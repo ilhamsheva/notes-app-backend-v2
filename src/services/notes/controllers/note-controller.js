@@ -1,11 +1,11 @@
 import { nanoid } from "nanoid";
 import notes from "../notes.js";
 import response from "../../../utils/response.js";
-import { InvariantError, NotFoundError } from "../../../exceptions/index.js";
+import { ClientError, InvariantError, NotFoundError } from "../../../exceptions/index.js";
 
 // Handler for NOTES
 const addNoteHandler = (req, res, next) => {
-  const { title = "untitled", tags, body } = req.body;
+  const { title, tags, body } = req.validated;
 
   const id = nanoid(16);
   const createdAt = new Date().toISOString();
@@ -57,7 +57,12 @@ const getNoteByIdHandler = (req, res, next) => {
 
 const editNotesByIdHandler = (req, res, next) => {
   const { id } = req.params;
-  const { title, tags, body } = req.body;
+
+  if (!req.body) {
+    return next(new ClientError("Request body is required"));
+  }
+
+  const { title, tags, body } = req.validated;
 
   const index = notes.findIndex((note) => note.id === id);
 
