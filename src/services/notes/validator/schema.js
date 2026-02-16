@@ -11,3 +11,7 @@ export const noteUpdatePayloadSchema = Joi.object({
   body: Joi.string(),
   tags: Joi.array().items(Joi.string()),
 });
+
+export const noteQuerySchema = Joi.object({
+  title: Joi.string().empty(),
+});

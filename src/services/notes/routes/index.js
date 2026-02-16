@@ -7,12 +7,13 @@ import {
   deleteNotesByIdHandler,
 } from "../controllers/note-controller.js";
 import validate from "../../../middlewares/validate.js";
-import { notePayloadSchema, noteUpdatePayloadSchema } from "../validator/schema.js";
+import { notePayloadSchema, noteQuerySchema, noteUpdatePayloadSchema } from "../validator/schema.js";
+import { validateQuery } from "../../../middlewares/validateQuery.js";
 
 const router = Router();
 
 router.post("/notes", validate(notePayloadSchema), addNoteHandler);
-router.get("/notes", getAllNotesHandler);
+router.get("/notes", validateQuery(noteQuerySchema), getAllNotesHandler);
 router.get("/notes/:id", getNoteByIdHandler);
 router.put("/notes/:id", validate(noteUpdatePayloadSchema), editNotesByIdHandler);
 router.delete("/notes/:id", deleteNotesByIdHandler);
