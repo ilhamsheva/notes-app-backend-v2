@@ -1,4 +1,5 @@
 import AuthenticationError from '../../../exceptions/auth-error.js';
+import TokenManager from '../../../security/token-manager.js';
 import response from '../../../utils/response.js';
 import UserRepository from '../../user/repositories/user-repositories.js';
 import authRepositories from '../repositories/auth-repositories.js';
