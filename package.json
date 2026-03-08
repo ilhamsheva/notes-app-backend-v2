@@ -24,6 +24,7 @@
   "homepage": "https://github.com/dicodingacademy/a261-backend-pemula-labs#readme",
   "dependencies": {
     "@hapi/hapi": "^21.4.4",
+    "amqplib": "^0.10.9",
     "bcrypt": "^6.0.0",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
