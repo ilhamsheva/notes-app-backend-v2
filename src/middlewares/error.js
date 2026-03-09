@@ -1,7 +1,13 @@
 import response from "../utils/response.js";
 import ClientError from "../exceptions/client-error.js";
+import multer from "multer";
 
 const ErrorHandler = (err, req, res, next) => {
+  // Handle MulterError
+  if (err instanceof multer.MulterError) {
+    return response(res, 400, err.message, null);
+  }
+
   // Handle ClientError and its subclasses (InvariantError, NotFoundError)
   if (err instanceof ClientError) {
     return response(res, err.statusCode, err.message, null);
